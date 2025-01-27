@@ -1,3 +1,7 @@
+Run on 3000 port with `npm run dev -- --port 3000`
+
+---
+
 # 🧑🏻‍🚀 NFCtron Frontend Case Study (Seating)
 
 > 👋 Vítejte u zadání pro kandidáty na pozici ⚛️ **React a Typescript Frontend Developer** v NFCtron! Vaším úkolem bude
