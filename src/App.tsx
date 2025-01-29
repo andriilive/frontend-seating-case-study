@@ -1,13 +1,14 @@
+import {useAuth} from "@/auth";
 import { Author } from "@/components";
 import { Event } from "@/components/Event";
 import { LoginForm } from "@/components/LoginForm";
 import { Button } from '@/components/ui/button.tsx';
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
 import './App.css';
 import {UserMenu} from "@/components/UserMenu";
 
 function App() {
-	const isLoggedIn = false;
+	const {isLoggedIn} = useAuth();
 	
 	return (
 		<div className="flex flex-col grow">
@@ -30,7 +31,10 @@ function App() {
                       Login or register
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="bg-white text-black">
+                  <DialogContent className="bg-white text-black" aria-describedby={'login-or-register'}>
+										<DialogTitle hidden aria-hidden={'true'}>
+											Login or register
+										</DialogTitle>
                     <LoginForm />
                   </DialogContent>
                 </Dialog>
