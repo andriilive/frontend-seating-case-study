@@ -6,17 +6,22 @@ type EventTicketsResponse = {
   "ticketTypes": TicketType[],
   "seatRows": {
     "seatRow": string,
-    "seats": Ticket[]
+    "seats": TicketData[]
   }[]
 }
 
-export type TicketType = {
+export type Ticket = {
+  ticketType: TicketType
+  ticketData: TicketData
+}
+
+type TicketType = {
   "id": string,
   "name": string,
   "price": number,
 }
 
-export type Ticket = {
+type TicketData = {
   "seatId": string,
   "place": number,
   "ticketTypeId": string
@@ -71,6 +76,8 @@ export const Seating = ({eventId}:{ eventId: string }) => {
   const rowsLength = seatRows.map(row => row.seats.length)
   const maxRowLength = Math.max(...rowsLength)
 
+  const {ticketTypes} = state.seatingMap
+
   console.log('rowsLength', rowsLength)
   console.log('rowsCount', rowsCount)
 
@@ -92,7 +99,9 @@ export const Seating = ({eventId}:{ eventId: string }) => {
                   placeNumber += 1
                   const ticketData = seatRows[rowIndex - 1].seats.find(seat => seat.place === placeNumber)
                   return (
-                    <Seat ticketData={ticketData} key={`${rowIndex}-${placeNumber}`} seatRow={rowIndex} place={placeNumber}/>
+                    <Seat available={!!ticketData} ticket={ticketData ? {ticketType: ticketTypes.find(type => type.id === ticketData.ticketTypeId)!, ticketData} : {
+                      ticketType: {id: '', name: '', price: 0}, ticketData: {seatId: '', place: 0, ticketTypeId: ''}
+                    }} key={`${rowIndex}-${placeNumber}`} place={placeNumber}/>
                   )
                 })
               }
