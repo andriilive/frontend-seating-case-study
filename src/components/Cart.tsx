@@ -1,22 +1,10 @@
 import {useCart} from "@/cart";
+import {Checkout} from "@/components/Checkout";
 import {Button} from "@/components/ui/button";
-import {useEffect, useState} from "react";
+import {DialogTrigger} from "@/components/ui/dialog";
 
 export const Cart = () => {
-  const [totalPrice, setTotalPrice] = useState(0)
-  const [ticketsCount, setTicketsCount] = useState(0)
-  const {cart} = useCart()
-
-  useEffect(() => {
-    let price = 0;
-    let count = 0;
-    Object.values(cart).forEach((ticket) => {
-      count += 1;
-      price += ticket.ticketType.price;
-    });
-    setTicketsCount(count);
-    setTotalPrice(price);
-  }, [cart]);
+  const {cartTotal, ticketsCount} = useCart()
 
   return (
   <nav className="sticky bottom-0 left-0 right-0 text-black bg-white border-t border-zinc-200 flex justify-center">
@@ -25,13 +13,17 @@ export const Cart = () => {
       {/* total in cart state */}
       <div className="flex flex-col">
         <span>Total for {ticketsCount} tickets</span>
-        <span className="text-2xl font-semibold">{totalPrice} CZK</span>
+        <span className="text-2xl font-semibold">{cartTotal} CZK</span>
       </div>
 
       {/* checkout button */}
-      <Button variant="default">
-        Checkout now
-      </Button>
+      <Checkout>
+        <DialogTrigger asChild>
+          <Button variant="default">
+            Checkout now
+          </Button>
+        </DialogTrigger>
+      </Checkout>
     </div>
   </nav>
   )

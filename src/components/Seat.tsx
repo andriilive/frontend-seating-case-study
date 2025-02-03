@@ -29,7 +29,7 @@ export const Seat = React.forwardRef<HTMLDivElement, SeatProps>((props, ref) => 
 					<span className="text-xs font-medium">{place}</span>
 				</div>
 			</PopoverTrigger>
-			<PopoverContent>
+			<PopoverContent className="min-w-[450px] text-xs">
 				<pre>{JSON.stringify(ticket, null, 2)}</pre>
 				
 				<footer className="flex flex-col">{

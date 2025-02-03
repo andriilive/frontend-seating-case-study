@@ -1,4 +1,4 @@
-import {useAuth} from "@/auth";
+import { useAuth } from "@/auth";
 import { Author } from "@/components";
 import { Cart } from "@/components/Cart";
 import { Event } from "@/components/Event";
@@ -44,9 +44,7 @@ function App() {
 					</div>
 				</div>
 			</nav>
-
 			<Event />
-			
 			<Cart />
 		</div>
 	);

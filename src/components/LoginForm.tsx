@@ -49,11 +49,11 @@ export const LoginForm = forwardRef<HTMLFormElement, HTMLAttributes<HTMLElement>
       setIsLoading(false);
     }} className="flex flex-col gap-4 relative overflow-hidden text-black">
       <div>
-        <label htmlFor="email">Email</label>
+        <label className={'text-xs text-gray-400'} htmlFor="email">Email</label>
         <Input name="email" defaultValue={TEST_EMAIL} type="email"/>
       </div>
       <div>
-        <label htmlFor="password">Password</label>
+        <label className={'text-xs text-gray-400'} htmlFor="password">Password</label>
         <Input name="password" defaultValue={TEST_PASSWORD} type="password"/>
       </div>
       <Button type="submit">Login</Button>

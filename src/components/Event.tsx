@@ -38,6 +38,9 @@ export const Event = () => {
     fetch("https://nfctron-frontend-seating-case-study-2024.vercel.app/event")
       .then<EventResponse>(response => response.json())
       .then(response => {
+
+        localStorage.setItem('eventId', response.eventId)
+
         setState({
           loading: false,
           error: null,

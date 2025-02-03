@@ -1,7 +1,7 @@
 'use client';
 
 import type {Ticket} from "@/components/Seating";
-import {createContext, type PropsWithChildren, useContext, useEffect, useReducer} from "react";
+import {createContext, type PropsWithChildren, useContext, useReducer} from "react";
 
 // TODO: improve the
 
@@ -9,8 +9,10 @@ type Cart = Record<string, Ticket>;
 
 const CartContext = createContext<{
   add(ticketId: string, ticketData: Ticket): void;
-  isInCart(ticketId: string): boolean
+  isInCart(ticketId: string): boolean;
   remove(ticketId: string): void;
+  ticketsCount: number;
+  cartTotal: number;
   cart: Cart;
 } | undefined>(undefined);
 
@@ -43,10 +45,6 @@ const CartProvider = ({children}: PropsWithChildren) => {
   const initialCart = JSON.parse(localStorage.getItem("cart") || "{}");
   const [cart, dispatch] = useReducer(cartReducer, initialCart);
 
-  useEffect(() => {
-    console.log(cart)
-  }, [cart]);
-
   const add = (ticketId: string, ticketData: Ticket) => {
     dispatch({type: "ADD_TICKET", ticketId, ticketData});
   };
@@ -60,7 +58,10 @@ const CartProvider = ({children}: PropsWithChildren) => {
   };
 
   return (
-    <CartContext.Provider value={{cart, add, remove, isInCart}}>
+    <CartContext.Provider value={{cart, add, remove, isInCart,
+      ticketsCount: Object.keys(cart).length,
+      cartTotal: Object.values(cart).reduce((acc, {ticketType}) => acc + ticketType.price, 0)
+    }}>
       {children}
     </CartContext.Provider>
   );
