@@ -1,5 +1,7 @@
 Run on 3000 port with `npm run dev -- --port 3000`
 
+[preview.mp4](./docs/preview.mp4)
+
 ---
 
 # 🧑🏻‍🚀 NFCtron Frontend Case Study (Seating)
